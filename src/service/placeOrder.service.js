@@ -33,7 +33,7 @@ module.exports.placeOrderService = (data) => {
                 const orderID = insertRow.insertId
                 const product_ids = product_id.split(',')
                 const product_rates = product_rate.split(',')
-                const product_quantitys = product_quantity.split(',')
+                const product_quantites = product_quantity.split(',')
                 //For adding multiple values , Use ( ? ) ==>  insert ..() values ?
                 const orderDetailQuery = `
                 INSERT INTO tb_order_details_master(
@@ -44,17 +44,19 @@ module.exports.placeOrderService = (data) => {
                     product_final_amount
                     )VALUES ?
                 `
+                
                 const data = []
-                product_ids.forEach((element , index) => {
+
+                product_ids.forEach((FirstArray , place) => {
                    const products = []
                    products.push(orderID) 
-                   products.push(element) 
-                   products.push(product_rates[index])
-                   products.push(product_quantitys[index])
-                   products.push(product_rates[index]*product_quantitys[index])
+                   products.push(FirstArray) 
+                   products.push(product_rates[place])
+                   products.push(product_quantites[place])
+                   products.push(product_rates[place]*product_quantites[place])
                    data.push(products)
                 });
-                console.log(orderDetailQuery, data)
+                console.log(orderDetailQuery, [data])
                 database.query(orderDetailQuery, [data] , (detailErr, detailRow) => {
                     if(detailErr){
                         reject({
