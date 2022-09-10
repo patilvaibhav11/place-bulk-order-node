@@ -32,8 +32,11 @@ module.exports.placeOrderService = (data) => {
             }else {
                 const orderID = insertRow.insertId
                 const product_ids = product_id.split(',')
+                console.log(product_ids)
                 const product_rates = product_rate.split(',')
+                console.log(product_rates)
                 const product_quantites = product_quantity.split(',')
+                console.log(product_quantites)
                 //For adding multiple values , Use ( ? ) ==>  insert ..() values ?
                 const orderDetailQuery = `
                 INSERT INTO tb_order_details_master(
@@ -47,17 +50,21 @@ module.exports.placeOrderService = (data) => {
                 
                 const data = []
 
-                product_ids.forEach((FirstArray , place) => {
+                product_ids.forEach((firstElement , index) => {
                    const products = []
                    products.push(orderID) 
-                   products.push(FirstArray) 
-                   products.push(product_rates[place])
-                   products.push(product_quantites[place])
-                   products.push(product_rates[place]*product_quantites[place])
+                   products.push(firstElement) 
+                   console.log(firstElement)
+                   products.push(product_rates[index])
+                   console.log(product_rates[index])
+                   products.push(product_quantites[index])
+                   console.log(product_quantites[index])
+                   products.push(product_rates[index]*product_quantites[index])
+                   console.log(product_rates[index]*product_quantites[index])
                    data.push(products)
                 });
                 console.log(orderDetailQuery, [data])
-                database.query(orderDetailQuery, [data] , (detailErr, detailRow) => {
+                database.query(orderDetailQuery, [data] , (detailErr, detailsRow) => {
                     if(detailErr){
                         reject({
                             ack:false,
@@ -68,7 +75,7 @@ module.exports.placeOrderService = (data) => {
                         resolve({
                             ack:true,
                             resCode:1,
-                            msg:'Order Placed Sucessfully'
+                            msg:`Your Order has been placed sucessfully`
                         })
                     }
                 })
