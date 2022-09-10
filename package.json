@@ -1,0 +1,25 @@
+{
+  "name": "place-order-api-node",
+  "version": "1.0.0",
+  "description": "place-order-api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patilvaibhav11/place-bulk-order-node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/patilvaibhav11/place-bulk-order-node/issues"
+  },
+  "homepage": "https://github.com/patilvaibhav11/place-bulk-order-node#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "js": "^0.1.0",
+    "mysql": "^2.18.1"
+  }
+}
